@@ -1,0 +1,11 @@
+interface NewError {
+  index: Int!
+  message: String!
+  path: [String!]!
+}
+
+type ChampionNoResultsReturned implements NewError {
+  index: Int!
+  message: String!
+  path: [String!]!
+}
