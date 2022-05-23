@@ -1,8 +1,9 @@
-package server
+package client
 
 import (
-	"github.com/kelseyhightower/envconfig"
 	"github.com/pkg/errors"
+
+	"github.com/kelseyhightower/envconfig"
 )
 
 type Config struct {
