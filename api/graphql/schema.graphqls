@@ -1,0 +1,90 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Mutation {
+  createChampion(input: CreateChampionInput!): CreateChampionPayload!
+  deleteChampion(input: DeleteChampionInput!): DeleteChampionPayload!
+}
+
+type Query {
+  champion(filter: ChampionFilterInput): ChampionPayload!
+  champions(filter: ChampionsFilterInput): ChampionsPayload!
+}
+
+scalar Date
+scalar ChampionId
+
+type Champion {
+  id: ChampionId!
+  titleHolder: String!
+  titleHolderNumber: Int
+  titleHolderOrderNumber: Int
+  dateWon: Date!
+  dateLost: Date
+  show: String!
+  numberOfReigns: Int
+  daysAsChampion: Int
+  previousChampion: String
+  currentChampion: Boolean
+  wrestlerId: Int!
+}
+
+type ChampionsPayload {
+  champions: [Champion!]
+  totalCount: Int!
+  errors: [NewError!]
+}
+
+type ChampionPayload {
+  champion: Champion
+  errors: [NewError!]
+}
+
+input ChampionsFilterInput {
+  titleHolder: String
+  year: YearInput
+  show: String
+}
+
+input YearInput {
+  start: Date
+  end: Date
+}
+
+input ChampionFilterInput {
+  date: Date
+  currentChampion: Boolean
+  previousChampion: Int
+}
+
+input DeleteChampionInput {
+  id: String!
+}
+
+type CreateChampionPayload {
+  success: Boolean!
+  champion: Champion!
+  errors: [NewError!]
+}
+
+type DeleteChampionPayload {
+  success: Boolean!
+  id: String!
+  errors: [NewError!]
+}
+input CreateChampionInput {
+  titleHolder: String!
+  dateWon: String
+  show: String!
+}
+
+input ChampionOrderByInput {
+  titleHolder: Sort
+  daysAsChampion: Sort
+}
+
+enum Sort {
+  asc
+  desc
+}
